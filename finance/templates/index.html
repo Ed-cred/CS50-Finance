@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Portfolio
+{% endblock %}
+
+{% block main %}
+    <table style="width:100%">
+        <thead>
+            <tr>
+                <th>Symbol</th>
+                <th>Shares</th>
+                <th>Price</th>
+                <th>TOTAL</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% set count = {"count_value":0} %}
+            {% for row in stock_info %}
+
+                <tr>
+                    <td>{{ row["symbol"] }}</td>
+                    <td>{{ row["shares"] }}</td>
+                    <td>{{ price[count.count_value] }}</td>
+                    <td>{{ row["shares"] * price[count.count_value] }}</td>
+                    {% if count.update({"count_value":count.count_value + 1}) %}
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td></td>
+                <td></td>
+                <th>CASH</th>
+                <th>{{ cash }}</th>
+            </tr>
+        </tfoot>
+    </table>
+{% endblock %}
